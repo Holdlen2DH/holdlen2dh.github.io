@@ -45,7 +45,6 @@ Also you can add an local image by setting the link with the image's relative pa
 
 $$ c^2 $$
 
-
 #### References
 
 1. [Wikipedia: Markdown](https://en.wikipedia.org/wiki/Markdown)
