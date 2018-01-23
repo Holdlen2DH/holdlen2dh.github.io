@@ -3,7 +3,7 @@
 
 # Markdown Tips and Tricks I Used
 
-Markdown is a lightweight markup language with plain text formating syntax <sup>[1]</sup>. I prefer using Markdown to write simple blogs. In this blog, I will introduce some useful trips and tricks I learned.
+Markdown is a lightweight markup language with plain text formating syntax <sup>[1]</sup>. I prefer using Markdown to write simple blogs. In this blog, I will introduce some useful tips and tricks I learned.
 
 #### Editor
 
