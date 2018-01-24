@@ -14,6 +14,3 @@
 #### 参考链接：
 
 1. [NumPy Reference](https://docs.scipy.org/doc/numpy/reference/)
-
-
-
