@@ -59,6 +59,8 @@ Maven世界中拥有大量的jar、war等构件。引入坐标构件是为了唯
 
 **dependencies和dependency**: dependencies 元素下可以包含多个dependency元素以声明项目的依赖项。同样的，需要依赖的项目也通过groupId, artifactId和version三个基本坐标元素进行定位。
 
+test on linux
+
 
 
 ## 使用Maven构建的项目
