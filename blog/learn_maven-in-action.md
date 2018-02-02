@@ -51,13 +51,51 @@ Maven世界中拥有大量的jar、war等构件。引入坐标构件是为了唯
 ### 依赖
 
 根元素project系的dependencies可以包含一个或多个dependency元素，以声明一个或多个项目依赖。每个项目依赖包含的元素有：
+
+**dependencies和dependency**: dependencies 元素下可以包含多个dependency元素以声明项目的依赖项。同样的，需要依赖的项目也通过groupId, artifactId和version三个基本坐标元素进行定位。
+
 * **groupId**, **artifactId**和**version**: 依赖的基本坐标，这是最重要的。
 * **type**：依赖的类型，对应于项目坐标定义的packaging，一般不必声明。
 * **scope**: 依赖范围。若依赖范围为test，则表示该依赖只对测试有效。
 * **optional**: 标记依赖是否可选。
 * **exclusions**: 用来排除传递性依赖。
 
-**dependencies和dependency**: dependencies 元素下可以包含多个dependency元素以声明项目的依赖项。同样的，需要依赖的项目也通过groupId, artifactId和version三个基本坐标元素进行定位。
+#### 依赖范围
+
+依赖范围就是用来控制依赖与三种classpath(编译classpath、测试classpath、运行classpath)的关系，Maven有以下几种依赖范围：
+
+* **compile**: 编译依赖范围，若没有指定，则默认使用该依赖范围。
+* **test**: 测试依赖范围。只对测试classpath有效，在编译主代码或者运行项目的使用时无法使用此类依赖。
+* **provided**: 已提供依赖范围。使用此依赖范围的Maven依赖，对于编译和测试classpath有效，但是运行时无效。
+* **runtime**: 运行时依赖范围。使用此依赖范围的Maven依赖，对于测试和运行classpath有效，但编译主代码时无效。
+* **system**： 系统依赖范围。该依赖与三种classpath的关系，和provided依赖范围完全一致。使用system范围的依赖时必须通过systemPath元素显示地指定依赖文件的路径。但此依赖不是通过Maven仓库解析的，而且往往与本机系统确定的，可能造成构建的不可移植，影谨慎使用。
+* **import**：导入依赖范围。该依赖范围不会对三种classpath产生实际的影响。
+
+## 仓库
+
+坐标和依赖是任何一个构件在Maven世界中的逻辑表示方式；而构建的物理表示方式是文件，Maven通过仓库来统一管理这些文件。
+
+Maven世界中，任何一个依赖、插件或者项目构建的输出，都可以称为构件。任何一个构件都有一组坐标唯一标识。根据这个坐标可以定位其在仓库中的唯一存储路径，亦即Maven的仓库布局方式。
+
+Maven分为两类：本地仓库和远程仓库。Maven根据坐标寻找构件的时候，首先会产看本地仓库，有则直接使用；没有或者需要查看是否有更新的构件版本，Maven会去远程仓库查找，发现后下载到本地仓库使用。如果本地仓库和远程仓库都没有需要的构件，Maven会报错。
+
+**中央仓库**：Maven核心自带的远程仓库，包含了绝大部分开源的构件。本地没有所需构件时，Maven会尝试从中央仓库下载。
+
+除了中央仓库和私服，还有很多其他公开的远程仓库，常见的有java.net, JBoss等。
+
+**本地仓库**：默认情况下，不管是在Windows还是Linux上，每个用户在自己的用户目录下都有一个路径名为.m2/repository的仓库目录。 
+
+有时候，由于某些原因，用户会想要自定义本地仓库目录地址，可以编辑~/.m2/settings.xml，设置localReposity元素的值为想要的仓库地址。需要注意的是，默认情况下，.m2/settings.xml文件是不存在的，需要从Maven安装目录复制过去在进行编辑
+
+## 聚合和继承
+
+软件设计人员往往会采用各种方式对软件划分模块，以得到更清晰的设计及更高的重用性。Maven的聚合特性能够把项目的各个模块聚合在一起构建，而Maven的继承特性则能帮助抽取各模块相同的依赖和插件等配置，在简化POM的同时，还能促进各个模块配置的一致性。
+
+## 私服
+
+私服不是Maven的核心概念,仅仅是一种衍生出来的特殊的Maven仓库。通过建立z自己的私服，可以降低中央仓库符合，节省外网带宽,加速Maven构建等。
+
+三个专门的Maven仓库管理软件可以用来建立私服：Apache基金会的Archiva，JFrog的Artifactory和Sonatype的Nexus。
 
 
 
@@ -69,5 +107,6 @@ Maven世界中拥有大量的jar、war等构件。引入坐标构件是为了唯
 
 ## 参考
 
-1. 许晓斌. Maven实战. 北京：机械工业出版社, 2010. 
+1. [Maven Getting Started Guide](http://maven.apache.org/guides/getting-started/index.html).
+2. 许晓斌. Maven实战. 北京：机械工业出版社, 2010. 
 
