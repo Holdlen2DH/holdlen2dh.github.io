@@ -1,12 +1,36 @@
 # 树形分类算法综述
+## 1 决策树
 
-## ID3
+### 1.1 ID3
+ID3是决策树学习的典型实现，由澳大利亚计算机科学家罗斯$\cdot$昆兰(J. Ross Quinlan, 1943-)提出。
 ID3: Induction of decision trees
+### 1.2 C4.5
+### 1.3 CART
 
-## C4.5
+### 1.4 节点划分
+#### 1.4.1 信息增益
+$$Ent(D) = -\sum_{k = 1}^{|y|}p_{k}log_2(p_{k})$$
+$$Gain(D, a) = Ent(D) - \sum_{v = 1}^{V}\frac{|D^v|}{|D|}Ent(D^v)$$
+#### 1.4.2 增益率
+$$Gain\_ratio(D, a) = \frac{Gain(D, a)}{IV(a)}$$
+$$IV(a) = -\sum_{v = 1}^{V}\frac{|D^v|}{|D|}log_{2}(\frac{|D^v|}{|D|})$$
+#### 1.4.3 基尼系数
+$$Gini(D) = \sum_{k = 1}^{|y|}\sum_{k^{'}\ne k}p_{k}p_{k^{'}} = 1 - \sum_{k = 1}^{|y|}p_{k}^2$$
+$$Gini\_index(D, a) = \sum_{v = 1}^{V}\frac{|D^v|}{|D|}Gini(D^v)$$
 
-## CART
+#### 1.4.4 连续值节点划分
 
+## 2 基于树的多分类系统
+### 2.1 梯度提升决策树(GBDT)
+### 2.2 随机森林(RF)
+### 2.3 极度随机森林(ERT)
+### 2.4 深度神经决策森林(DNDT)
+### 2.5 XGBoost
+$$\hat{y}_i = \sum\limits_{k = 1}^{K}f_k(\bm{x}_i), f_k \in \mathcal{F}$$
+$$\mathcal{L} = \sum\limits_{i}l(\hat{y}_i, y_i) + \sum\limits_{k}\Omega(f_k), \quad where \quad \Omega(f) = \gamma T + \frac{1}{2}\lambda||w||^2$$
+$$\mathcal{L}^{(t)} = \sum\limits_{i = 1}^{n}l(y_i, \hat{y}_{i}^{(t - 1)} + f_{t}(\bm{x}_i)) + \Omega(f_t)$$
+$$\mathcal{L}^{(t)} \simeq \sum\limits_{i = 1}^{n}[l(y_i, \hat{y}_i^{(t - 1)}) + g_{i}f_{t}(\bm{x}_{i}) + \frac{1}{2}h_{i}f_t^2(\bm{x}_i)] + \gamma T + \frac{1}{2}\lambda\sum\limits_{j = 1}^{T}w_j^2$$
+### 2.6 LightGBM
 
 
 ## 参考文献
