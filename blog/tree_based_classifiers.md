@@ -1,8 +1,9 @@
 # 树形分类算法综述
 ## 1 决策树
-
+最初的决策树算法是心理学家兼计算机科学家E.B. Hunt于1962年在研究人类的概念学习过程是提出的概念学习系统(Concept Learning System, CLS)。CLS确立了决策树“分而治之”的学习策略。
 ### 1.1 ID3
-ID3是决策树学习的典型实现，由澳大利亚计算机科学家罗斯$\cdot$昆兰(J. Ross Quinlan, 1943-)提出。
+ID3是决策树学习的典型实现，由澳大利亚计算机科学家罗斯$\cdot$昆兰(J. Ross Quinlan, 1943-)提出。Quinlan师承Hunt，于1968年获得美国华盛顿大学的计算机博士学位，后回悉尼大学任教。1978年Quinlan到斯坦福大学访问时，开发了类似CLS的程序，最重要的改进是引入了信息增益准则，后来Quinlan把该工作整理成ID3算法于1979年发表。1986年Machine Learning创刊，邀请Quinlan在创刊号上重新发表了ID3算法，掀起了决策树研究的热潮。
+
 ID3: Induction of decision trees
 ### 1.2 C4.5
 ### 1.3 CART
