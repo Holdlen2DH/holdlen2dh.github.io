@@ -1,0 +1,12 @@
+digraph G{
+    compound = true
+
+    node [shape = Mrecord, style = filled, colorsheme = spectral7]
+    cls [label="1962|CLS|Hunt", fillcolor=yellow]
+    dt_id3 [label = "1979|ID3|Quinlan"]
+    dt_c45 [label = "1993|C4.5|Quinlan"]
+    dt_cart [label = "1984|CART|Breiman"]
+
+    cls -> dt_id3 -> dt_cart -> dt_c45
+
+}
