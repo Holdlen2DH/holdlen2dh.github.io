@@ -1,0 +1,43 @@
+digraph {
+    compound=true
+	fontname="Inconsolata, Consolas"
+	fontsize=20
+	margin="0,0"
+	ranksep=0.5
+	penwidth=0.5
+	forcelabels=true
+
+    subgraph cluster_dl {
+        margin="10,10"
+		labeljust="left"
+		label = "Deep Learning"
+		style=filled
+		fillcolor=gray95
+
+        dndf [shape = Mrecord, label = "2015|DNDF|Kontschieder", style = filled, fillcolor=lightyellow]
+        df [shape = Mrecord, label = "2017|DF|Zhihua Zhou", style = filled, fillcolor=lightyellow]
+
+
+       
+
+        dl [shape = circle, label = "DL", style = filled, filledcolor = gray95]  
+
+        dt [shape = circle, label = "DT"]
+
+        rf [shape = circle, label = "RF"]
+        
+
+        dl -> dndf
+        dl -> df
+        dt -> dndf
+        rf -> df
+
+        {rank = same; dndf; df}
+
+
+    }
+
+    
+ 
+
+}

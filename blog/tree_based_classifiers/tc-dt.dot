@@ -1,0 +1,38 @@
+digraph {
+    compound=true
+	fontname="Inconsolata, Consolas"
+	fontsize=20
+	margin="0,0"
+	ranksep=0.5
+	penwidth=0.5
+	forcelabels=true
+   
+    
+
+    subgraph cluster_dt{
+        margin="10,10"
+		labeljust="left"
+		label = "Decision Tree"
+		style=filled
+		fillcolor=gray95
+
+        node [shape=Mrecord, style=filled, colorscheme=spectral7]
+
+
+        dt [shape = circle, label = "DT"]
+        cls [label="1962|CLS|Hunt", fillcolor=4]
+
+        dt_id3 [label = "1979|ID3|Quinlan", fillcolor=4]
+        dt_c45 [label = "1993|C4.5|Quinlan", fillcolor=4]
+        dt_cart [label = "1984|CART|Breiman", fillcolor=4]
+
+        cls -> dt
+        dt -> {dt_id3; dt_cart; dt_c45}
+
+        {rank = same; dt_id3; dt_c45; dt_c45}
+    }
+
+    
+ 
+
+}

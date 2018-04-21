@@ -1,0 +1,50 @@
+digraph {
+    compound=true
+	fontname="Inconsolata, Consolas"
+	fontsize=20
+	margin="0,0"
+	ranksep=0.5
+	penwidth=0.5
+	forcelabels=true
+ 
+    subgraph cluster_el{
+        margin="10,10"
+		labeljust="left"
+		label = "Tree-based Ensemble Learning"
+		style=filled
+		fillcolor=gray95
+
+		node [shape=Mrecord, style=filled, colorscheme=spectral7]
+
+        el [shape = circle, label = "EL"]
+        bst [label = "Boosting"]
+        bag [label = "Bagging"]
+
+        ada_bst [label = "Adaboost"]
+
+        rf [label = "2001|RF|Breiman", fillcolor=4]
+        ert [label = "2006|ERT|Geurts", fillcolor=4]
+
+        gbdt [label = "2001|GDBT|Friedman", fillcolor=4]
+        xgb [label = "2016|XGBoost|Tianqi Chen", fillcolor=4]
+        lightgbm  [label = "2017|LightGBM|Guolin Ke",fillcolor=4]
+        
+        dt [shape = circle, label = "DT", style = filled, fillcolor = white]
+        dt -> el
+        {rank = same; dt; el}
+       
+        el -> bst
+        el -> bag
+
+        bst -> ada_bst
+        bst -> gbdt
+        
+        gbdt -> xgb -> lightgbm
+        
+        bag -> rf -> ert
+
+        
+    }
+
+
+}
