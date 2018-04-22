@@ -66,7 +66,7 @@
                             </h5>
                         </div>
                         <div class="w3-container">
-                            <p>  
+                            <p style = "text-indent: 2em">  
                             最初的决策树算法是心理学家兼计算机科学家E.B. Hunt于1962年在研究人类的概念学习过程是提出的概念学习系统(Concept Learning System, CLS)。CLS确立了决策树“分而治之”的学习策略。
 
                             <div align = center>
@@ -92,57 +92,131 @@
 
                             <h4><b>1. 决策树</b></h4>
                             <h4>1.1 ID3<a style = "color: deepskyblue" href="#b1999" id="id1">[1]</a></h4>
-                            <p>
+                            <p style = "text-indent: 2em">
                                 ID3是典型的决策树学习算法，由澳大利亚计算机科学家罗斯$\cdot$昆兰(J. Ross Quinlan, 1943-)提出。Quinlan师承Hunt，于1968年获得美国华盛顿大学的计算机博士学位，后回悉尼大学任教。1978年Quinlan到斯坦福大学访问时，开发了类似CLS的程序，最重要的改进是引入了信息增益准则，后来Quinlan把该工作整理成ID3算法于1979年发表。1986年Machine Learning创刊，邀请Quinlan在创刊号上重新发表了ID3算法，掀起了决策树研究的热潮。
                             </p>
                             <h4>1.2 C4.5 </h4>
                             <h4>1.3 CART</h4>
-                            <h4>1.4 节点划分</h4>
-                            <table style = "font-size: 16px" border = "|" align = center>
-                                <tr>
-                                    <th>编号</th>
-                                    <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td>
-                                    <td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td>
-                                    <td>14</td><td>15</td><td>16</td><td>17</td>
-                                </tr>
-                                <tr>
-                                    <th>色泽</th>
-                                    <td>青绿</td><td>乌黑</td><td>乌黑</td><td>青绿</td><td>浅白</td><td>青绿</td>
-                                    <td>乌黑</td><td>乌黑</td><td>乌黑</td><td>青绿</td><td>浅白</td><td>浅白</td><td>青绿</td>
-                                    <td>浅白</td><td>乌黑</td><td>浅白</td><td>青绿</td>
-                                </tr>
-                                <tr>
-                                    <th>好瓜</th>
-                                    <td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td>
-                                    <td>是</td><td>是</td><td>否</td><td>否</td><td>否</td><td>否</td><td>否</td>
-                                    <td>否</td><td>否</td><td>否</td><td>否</td>
-                                </tr>
-                            </table>
+                            <h4>1.4 结点划分</h4>
+                            <p style = "text-indent: 2em">
+                                决策树学习的关键是如何选择最优划分属性，对于连续值属性，还要确定划分点。
+                                选择最优划分属性的原则是分解结点所包含的样本尽可能属于同一类，即结点纯度高。
+                                常用的最优划分属性选择方法有信息增益、增益率、基尼系数等。
+                                下面通过《机器学习》<sup><a style = "color: deepskyblue" href = "#ZHZhou_ML_book_2016">[12]</a></sup>表4.1中部分属性对上述最优属性划分方法进行计算和解释，多数内容均摘自该书，但对计算细节进行了补充。
+                            </p>
+                            <div align = center style = "font-size: 15px">表1. 部分西瓜数据集3.0</div>
+                            <div style = "text-align: center">
+                                <table style = "font-size: 15px; margin: auto" border = "|" >
+                                    <tr>
+                                        <th>编号</th>
+                                        <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td>
+                                        <td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td>
+                                        <td>14</td><td>15</td><td>16</td><td>17</td>
+                                    </tr>
+                                    <tr>
+                                        <th>色泽</th>
+                                        <td>青绿</td><td>乌黑</td><td>乌黑</td><td>青绿</td><td>浅白</td><td>青绿</td>
+                                        <td>乌黑</td><td>乌黑</td><td>乌黑</td><td>青绿</td><td>浅白</td><td>浅白</td><td>青绿</td>
+                                        <td>浅白</td><td>乌黑</td><td>浅白</td><td>青绿</td>
+                                    </tr>
+                                    <tr>
+                                        <th>密度</th>
+                                        <td>0.697</td><td>0.774</td><td>0.634</td><td>0.608</td><td>0.556</td><td>0.403</td>
+                                        <td>0.481</td><td>0.437</td><td>0.666</td><td>0.243</td><td>0.245</td><td>0.343</td><td>0.639</td>
+                                        <td>0.657</td><td>0.360</td><td>0.593</td><td>0.719</td>
+                                    </tr>
+                                    <tr>
+                                        <th>好瓜</th>
+                                        <td>是</td><td>是</td><td>是</td><td>是</td><td>是</td><td>是</td>
+                                        <td>是</td><td>是</td><td>否</td><td>否</td><td>否</td><td>否</td><td>否</td>
+                                        <td>否</td><td>否</td><td>否</td><td>否</td>
+                                    </tr>
+                                </table>
+                            </div>
+
                             <h5>1.4.1 信息增益</h5>
-                            <p>
+                            <p style = "text-indent: 2em">
+                                <b> ID3算法就以信息增益为准则选择划分属性。</b>                               
+                                假设当前样本集合\(D\)中第\(k\)类样本所占的比例为\(p_k(k = 1, 2, \cdots, |\mathcal{Y}|)\)， 则样本集合\(D\)的纯度可以通过信息熵(Information Entropy, IE)\(Ent(D)\)来度量。
+                                假设离散属性\(a\)有\(V\)个可能的取值，其中第\(v\)个分支结点包含的所有取值为\(a^v\)的样本，记为\(D^v\)，通过计算各个结点的\(D^v\)的信息熵和权重，可以获得引入属性\(a\)后的信息增益(Information Gain, IG)\(Gain(D, a)\)。\(Ent(D)\)和\(Gain(D, a)\)的定义如下面公式所示。信息熵越小，则样本集合\(D\)的纯度越高。信息增益越大，则引入属性\(a\)获得的纯度提升越大。
                                 <div style = "font-size: 16px" align = center>
                                     \(Ent(D) = -\sum_{k = 1}^{|y|}p_{k}log_2(p_{k})\)
                                     <br><br>
                                     \(Gain(D, a) = Ent(D) - \sum_{v = 1}^{V}\frac{|D^v|}{|D|}Ent(D^v)\)   
                                 </div>
                             </p>
+                            <p style = "text-indent: 2em">
+                                以表1中的数据集为例，样本个数\(|D| = 17\)， 类别数\(|\mathcal{Y}| = 2\)。根节点包含所有样例，其中正例为8个，负例为8个，则根节点的信息熵为
+                                <div style = "font-size: 16px" align = center>
+                                    \(Ent(D) = -\sum_{k = 1}^{2}p_{k}log_{2}p_{k} = -\left(\frac{8}{17}log_{2}\frac{8}{17} + \frac{9}{17}log_{2}\frac{9}{17}\right) = 0.998\)
+                                </div>
+                            </p>
+                            <p style = "text-indent: 2em">
+                                下面需要计算该结点下每个属性的信息增益。以属性色泽为例，根据属性值可以划分3个子集，分别记为\(D^1(色泽 = 青绿)\{+:[1,4,6]; -: [10,14,17]\}\)，\(D^2(色泽 = 乌黑)\{+:[2,3,7,8]; -:[9, 15]\}\)， \(D^3(色泽 = 浅白)\{+:[5]; -:[11,12,14, 16]\}\)。三个结点的信息上分别为\(Ent(D^1) = 1.000\), \(Ent(D^1) = 0.918\), \(Ent(D^1) = 0.722\)，属性色泽的信息增益为
+                                <div style = "font-size: 16px" align = center>
+                                    \(Gain(D, 色泽) = 0.998 - \left(\frac{6}{17} \times 1.000 + \frac{6}{17} \times 0.918 + \frac{5}{17} \times 0.722\right) = 0.109\)
+                                </div>
+                            </p>
+                            <p style = "text-indent: 2em">
+                                计算所有属性的信息增益，取信息增益最大的属性作为最优划分属性。
+                            </p>
+
                             <h5>1.4.2 增益率</h5>
-                            <p>
+                            <p style = "text-indent: 2em">
+                                <b>C4.5决策树算法采用增益率(Gain Ratio, GR)来选择最优划分属性</b>，具体定义如下：
                                 <div style = "font-size: 16px" align = center>
                                     \(Gain\_ratio(D, a) = \frac{Gain(D, a)}{IV(a)}\)
                                     <br><br>
                                     \(IV(a) = -\sum_{v = 1}^{V}\frac{|D^v|}{|D|}log_{2}(\frac{|D^v|}{|D|})\)
+                                    <br><br>
+                                    \(IV(色泽) = -\left(\frac{6}{17}log_{2}\frac{6}{17} + \frac{6}{17}log_{2}\frac{6}{17} + \frac{5}{17}log_{2}\frac{5}{17}\right) = 1.5799\)
                                 </div>
                             </p>
-                            <h5>1.4.3 基尼系数</h5>
-                            <p>
+                            <p style = "text-indent: 2em">
+                                IV称为属性a的固有值(Intrinsic Value)。属性a的可能取值数目越多，即\(V\)越大，则IV(a)值越高。需要注意的是，增益率准则对取值数目较少的属性具有偏好，C4.5算法并不直接选择增益率最大的作为最优划分属性，而是先找出信息增益高出平均水命的属性，再从中选择增益率最高的。
+                            </p>
+                            <h5>1.4.3 基尼指数</h5>
+                            <p style = "text-indent: 2em">
+                                <b>CART决策树使用基尼指数(Gini Index, GI)来选择最优划分属性。</b>Gini值反映了从数据集中随机选择两个样本不一致的概率，Gini值越小，则数据集纯度越高。应用时，选择基尼指数最小的属性作为最优划分属性。Gini值和Gini系数的定义如下：
                                 <div style = "font-size: 16px" align = center>
                                     \(Gini(D) = \sum_{k = 1}^{|y|}\sum_{k^{'}\ne k}p_{k}p_{k^{'}} = 1 - \sum_{k = 1}^{|y|}p_{k}^2\)
                                     <br><br>
                                     \(Gini\_index(D, a) = \sum_{v = 1}^{V}\frac{|D^v|}{|D|}Gini(D^v)\)
                                 </div>
+                                <div style = "font-size: 16px" align = center>
+
+                                </div>
+                            </p>
+                            <p style = "text-indent: 2em">
+                                以属性色泽为例，Gini值和该属性的基尼指数计算如下：
+                                <div style = "font-size: 16px" align = center>
+                                    \(Gini(D^1) = 1 - \left[(\frac{3}{6})^2 + (\frac{3}{6})^2\right] = 0.500\)
+                                    <br><br>
+                                    \(Gini(D^2) = 1 - \left[(\frac{4}{6})^2 + (\frac{2}{6})^2\right] = 0.444\)
+                                    <br><br>
+                                    \(Gini(D^3) = 1 - \left[(\frac{1}{5})^2 + (\frac{4}{5})^2\right] = 0.320\)
+                                    <br><br>
+                                    \(Gini\_index(D, 色泽) = \frac{6}{17} \times 0.500 + \frac{6}{17} \times 0.444 + \frac{5}{17} \times 0.320 = 0.4273\)
+                                </div>
                             </p>
                             <h5>1.4.4 连续值节点划分</h5>
+                            <div align = center style = "font-size: 15px">表2. 连续值信息增益处理结果</div>
+                            <div style = "text-align: center">
+                                <table style = "font-size: 15px; margin: auto" border = "|" >
+                                    <tr>
+                                        <th>编号</th>
+                                        <td>1</td><td>2</td><td>3</td><td><b>4</b></td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td>
+                                    </tr>
+                                    <tr>
+                                        <th>候选值</th>
+                                        <td>0.2440</td><td>0.2940</td><td>0.3515</td><td><b>0.3815</b></td><td>0.4200</td><td>0.4590</td><td>0.5185</td><td>0.5745</td><td>0.6005</td><td>0.6210</td><td>0.6365</td><td>0.6480</td><td>0.6615</td><td>0.6815</td><td>0.7080</td><td>0.7465</td>
+                                    </tr>
+                                    <tr>
+                                        <th>信息<br>增益</th>
+                                        <td>0.0563</td><td>0.1180</td><td>0.1861</td><td><b>0.2624</b></td><td>0.0935</td><td>0.0302</td><td>0.0036</td><td>0.0022</td><td>0.0022</td><td>0.0036</td><td>0.0302</td><td>0.0060</td><td>0.0008</td><td>0.0241</td><td>0.0003</td><td>0.0670</td>
+                                    </tr>
+                                </table>
+                            </div>
                             <h4><b>2 基于树的集成学习</b></h4>
                             <h4>2.1 梯度提升决策树</h4>
                             <h4>2.2 随机森林</h4>
@@ -163,7 +237,7 @@
                             <h4>2.6 LightGBM</h4>
 
                             <h4><b>参考文献</b></h4>
-                            <table style = "font-family: 'Times New Roman'; font-size:18px" id ="b1999">
+                            <table style = "font-family: 'Times New Roman'; font-size:18px" id ="quinlan_id3_1986">
                                 <colgroup><col class="label"><col></colgroup>
                                 <tbody valign="top">
                                     <tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>J. R. Quinlan. <a style = "color: blue" href = "https://link.springer.com/article/10.1007/BF00116251">Induction of decision trees</a>. <i>Machine Learning</i>, 1(1): 81-106, 1986.</td></tr>
@@ -239,10 +313,10 @@
                                 </tbody>
                             </table>
 
-                            <table style = "font-family: 'Times New Roman'; font-size:18px" id ="b1999">
+                            <table style = "font-family: 'Times New Roman'; font-size:18px" id ="ZHZhou_ML_book_2016">
                                 <colgroup><col class="label"><col></colgroup>
                                 <tbody valign="top">
-                                    <tr><td class="label"><a class="fn-backref" href="#id1">[12]</a></td><td>周志华. 机器学习. <i>清华大学出版社，北京</i>， 清华大学出版社，北京，2016.</td></tr>
+                                    <tr><td class="label"><a class="fn-backref" href="#id12">[12]</a></td><td>周志华. 机器学习. <i>清华大学出版社，北京</i>， 清华大学出版社，北京，2016.</td></tr>
                                 </tbody>
                             </table>
 
