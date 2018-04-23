@@ -67,18 +67,18 @@
                         </div>
                         <div class="w3-container">
                             <p style = "text-indent: 2em">  
-                            最初的决策树算法是心理学家兼计算机科学家E.B. Hunt于1962年在研究人类的概念学习过程是提出的概念学习系统(Concept Learning System, CLS)。CLS确立了决策树“分而治之”的学习策略。
+                                最初的决策树算法是心理学家兼计算机科学家E.B. Hunt于1962年在研究人类的概念学习过程是提出的概念学习系统(Concept Learning System, CLS)。CLS确立了决策树“分而治之”的学习策略。
 
-                            <div align = center>
-                                <img src="./tree_based_classifiers/tc-dt.png"   alt="decision tree" width="400">
-                            </div>
-                            <div align = center>
-                                <img src="./tree_based_classifiers/tc-el.png"   alt="decision tree" width="400">
-                            </div>
-                            <div align = center>
-                                <img src="./tree_based_classifiers/tc-dl.png"   alt="decision tree" width="400">
-                            </div>
-                                
+                                <div align = center>
+                                    <img src="./tree_based_classifiers/tc-dt.png"   alt="decision tree" width="400">
+                                </div>
+                                <div align = center>
+                                    <img src="./tree_based_classifiers/tc-el.png"   alt="decision tree" width="400">
+                                </div>
+                                <div align = center>
+                                    <img src="./tree_based_classifiers/tc-dl.png"   alt="decision tree" width="400">
+                                </div>
+                                    
                                 
                             </p>
                             
@@ -183,9 +183,6 @@
                                     <br><br>
                                     \(Gini\_index(D, a) = \sum_{v = 1}^{V}\frac{|D^v|}{|D|}Gini(D^v)\)
                                 </div>
-                                <div style = "font-size: 16px" align = center>
-
-                                </div>
                             </p>
                             <p style = "text-indent: 2em">
                                 以属性色泽为例，Gini值和该属性的基尼指数计算如下：
@@ -200,6 +197,22 @@
                                 </div>
                             </p>
                             <h5>1.4.4 连续值节点划分</h5>
+                            <p style = "text-indent: 2em">
+                                现实学习任务中经常遇到连续值的属性。最简单的做法就是采用二分法对连续值进行离散化处理，C4.5决策树算法中就采用的机制。 假设样本集合\(D\)的连续属性\(a\)出现了\(n\)个不同的取值\(T_o\)。具体做法如下所示：
+                                <ol>
+                                    <li>将\(T_s\)按升序排列得到\(T_s = \{a^1, a^2, \cdots, a^n\}\);</li>
+                                    <li>取每两个相邻取值的均值作为候选划分点，得到候选划分点序列\(T_{a}\);</li>
+                                    <li>对每个候选划分点\(t\)，将\(D\)分为小于\(t\)和大于\(t\)的子集\(D_t^{-}\)和\(D_t^{+}\)，并计算给予划分点\(t\)二分后的信息增益\(Gain(D, a, t)\)</li>
+                                    <li>选择信心增益最大的候选值作为该连续属性的划分点</li>            
+                                </ol>
+                                <div style = "font-size: 16px" align = center>
+                                        \( T_a = \{\frac{a^i + a^{i + 1}}{2}|1 \le i \le n - 1\}\)
+                                        <br><br>
+                                        \(Gain(D, a) = \underset{t \in T_a}{max}~ Gain(D, a, t) = \underset{t \in T_a}{max}\{Ent(D) - \underset{\lambda \in \{-, +\}}{\sum}\frac{|D_t^{\lambda}|}{|D|}Ent(D_t^{\lambda})\}\)
+                                    </div>
+                                <div>
+                            </p>
+
                             <div align = center style = "font-size: 15px">表2. 连续值信息增益处理结果</div>
                             <div style = "text-align: center">
                                 <table style = "font-size: 15px; margin: auto" border = "|" >
@@ -217,6 +230,18 @@
                                     </tr>
                                 </table>
                             </div>
+                            <p style = "text-indent: 2em">
+                                以表1中连续值属性密度为例，候选划分点集合及相应的信息增益如图表2所示。该属性最大信息增益为0.262，对应的划分点为0.381。以该划分点对\(D\)获得的两个子集为\(D_{0.381}^{-}\)和\(D_{0.381}^{+}\)。子集内容和信息增益计算过程如下面公式所示。
+                                <div style = "font-size: 16px" align = center>
+                                    \(D_{0.381}^{-} = \{好瓜: [\quad];坏瓜: [10, 11, 12, 15]\}\)
+                                    <br><br>
+                                    \(D_{0.381}^{+} = \{好瓜: [1,2,3,4,5,6,7,8];坏瓜: [9,13,14,15,17]\}\)
+                                    <br><br>
+                                    \(Ent(D_{0.381}^{-}) = 0; (Ent(D_{0.381}^{+}) = -\left(\frac{8}{13}log_2\frac{8}{13} + \frac{5}{13}log_2\frac{5}{13}\right) = 0.9612\)
+                                    <br><br>
+                                    \(Gain(D, a) = 0.9975 - (0 + \frac{13}{17}\times 0.9612) = 0.2624\)
+                                </div>
+                            </p>
                             <h4><b>2 基于树的集成学习</b></h4>
                             <h4>2.1 梯度提升决策树</h4>
                             <h4>2.2 随机森林</h4>
