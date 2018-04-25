@@ -247,13 +247,28 @@
                             <h4>2.2 极度随机森林</h4>
                             <h4>2.3 梯度提升决策树</h4>
                             <p style = "text-indent: 2em">
-                                一般预测学习(Predictive Learning)问题的目标是：给定\(n\)个含有\(m\)维特征的数据集\(\mathcal{D} = \{(\mathbf{x}_i, y_i)\}, (|\mathcal{D}| = n, \mathcal{x}_i \in \Re^{m}m y_i \in \Re)\)，估计使特定代价函数(Loss Function)或目标函数(Objective Function)最小化的映射模型\(\hat{y} = F^{*}(\mathbf{x})\)。
+                                一般预测学习(Predictive Learning)问题的目标是：给定\(n\)个含有\(m\)维特征的数据集\(\mathcal{D}\)，估计使特定代价函数(Loss Function)或目标函数(Objective Function)最小化的映射模型\(\hat{y} = F^{*}(\mathbf{x})\)。
                                 <div style = "font-size: 16px" align = center>
+                                    \(\mathcal{D} = \{(\mathbf{x}_i, y_i)\}, (|\mathcal{D}| = n, \mathcal{x}_i \in \Re^{m}, y_i \in \Re)\)
+                                    <br><br>
                                     \(F^{*}(x) = \underset{F}{arg~min}\mathcal{L}(y, F(\mathbf{x}))\)
                                 </div>
                             </p>
                             <p style = "text-indent: 2em">
-                                梯度提升决策树(Gradient Boosting Decision Tree, GBDT)是一种结合决策树和Boosting的集成学习算法，一般选择CART作为基学习器。可以从“函数空间的最优化问题”和“加性模型(Additive Model)”两个不同的角度理解GBDT算法。
+                                梯度提升决策树(Gradient Boosting Decision Tree, GBDT)是一种结合决策树和Boosting的集成学习算法，一般选择CART作为基学习器。可以从“函数空间的最优化问题”和“加性模型(Additive Model)”两个不同的角度理解GBDT算法。<br>
+                            </p>
+                            <p style = "text-indent: 2em"><b>函数空间的最优化问题</b></p>
+                            <p style = "text-indent: 2em">
+                                将\(\mathcal{L}(y, F(\mathbf{x}))\)看做是关于\(F(\mathbf{x})\)的函数，通过最陡下降法的迭代公式得到最终映射函数。如下面公式所示，\(f_k(\mathbf{x})\)是增量函数，每次迭代对负梯度进行预测，乘子\(\rho_m\)则通过线搜索(Line Search)计算得到。
+                                <div style = "font-size: 16px" align = center>
+                                    \(F_k(\mathbf{x}) = F_{k - 1}(\mathbf{x}) - \rho_{k}g_{k}(\mathbf{x}) = F_{k - 1}(\mathbf{x}) + f_k(\mathcal{x})\)
+                                    <br><br>
+                                    \(F^{*} = \sum\limits_{k = 1}^{K}f_{k}(\mathbf{x}), f_k \in \mathcal{F}\)
+                                    <br><br>
+                                    \(g_m(\mathbf{x}) = \frac{\partial \mathcal{L}(y, F(\mathbf{x}))}{\partial F(\mathbf{x})} \left|_{F(\mathbf{x}) = F_{m - 1}~(\mathbf{x})} \right.\)
+                                    <br><br>
+                                    \(\rho_{m} = \underset{\rho}{arg~min}\mathcal{L}(y, F_{m - 1}~(\mathbf{x} - \rho g_m(\mathbf{x}))\)
+                                </div>
                             </p>
                             <h4>2.4 XGBoost</h4>
                             <p>
