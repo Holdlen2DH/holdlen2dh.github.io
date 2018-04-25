@@ -243,11 +243,19 @@
                                 </div>
                             </p>
                             <h4><b>2 基于树的集成学习</b></h4>
-                            <h4>2.1 梯度提升决策树</h4>
-                            <h4>2.2 随机森林</h4>
+                            <h4>2.1 随机森林</h4>
+                            <h4>2.2 极度随机森林</h4>
                             <h4>2.3 梯度提升决策树</h4>
-                            <h4>2.4 极度随机森林</h4>
-                            <h4>2.5 XGBoost</h4>
+                            <p style = "text-indent: 2em">
+                                一般预测学习(Predictive Learning)问题的目标是：给定\(n\)个含有\(m\)维特征的数据集\(\mathcal{D} = \{(\mathbf{x}_i, y_i)\}, (|\mathcal{D}| = n, \mathcal{x}_i \in \Re^{m}m y_i \in \Re)\)，估计使特定代价函数(Loss Function)或目标函数(Objective Function)最小化的映射模型\(\hat{y} = F^{*}(\mathbf{x})\)。
+                                <div style = "font-size: 16px" align = center>
+                                    \(F^{*}(x) = \underset{F}{arg~min}\mathcal{L}(y, F(\mathbf{x}))\)
+                                </div>
+                            </p>
+                            <p style = "text-indent: 2em">
+                                梯度提升决策树(Gradient Boosting Decision Tree, GBDT)是一种结合决策树和Boosting的集成学习算法，一般选择CART作为基学习器。可以从“函数空间的最优化问题”和“加性模型(Additive Model)”两个不同的角度理解GBDT算法。
+                            </p>
+                            <h4>2.4 XGBoost</h4>
                             <p>
                                 <div style = "font-size: 16px" align = center>
                                     \(\hat{y}_i = \sum\limits_{k = 1}^{K}f_k(\mathbf{x}_i), f_k \in \mathcal{F}\)
