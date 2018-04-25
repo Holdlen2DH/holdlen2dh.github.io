@@ -270,6 +270,16 @@
                                     \(\rho_{m} = \underset{\rho}{arg~min}\mathcal{L}(y, F_{m - 1}~(\mathbf{x} - \rho g_m(\mathbf{x}))\)
                                 </div>
                             </p>
+                            <p style = "text-indent: 2em"><b>加性模型</b></p>
+                            <p style = "text-indent: 2em">
+                                另一种比较容易理解的方法是基于“加性模型”，即基学习器的线型组合。
+                                <div style = "font-size: 16px" align = center>
+                                    \(F^{*}(\mathbf{x}) = \sum\limits_{k = 1}^{K}f_{k}(\mathbf{x})\)
+                                </div>
+                            </p>
+                            <p style = "text-indent: 2em">
+                                对于数据集\(\mathcal{D}\)，使用基学习器\(F_{1}(\mathcal{x}) = f_{1}(\mathbf{x})\)取得的结果无法满足要求时，在不改变初始模型\(f_{1}(\mathbf{x})\)的情况下，可以通过增加一个新的基学习器来提升预测精度，如果仍不满足要求，则继续增加直到满足要求或达到终止条件为止，如下面公式所示。
+                            </p>
                             <h4>2.4 XGBoost</h4>
                             <p>
                                 <div style = "font-size: 16px" align = center>
