@@ -255,7 +255,9 @@
                                 </div>
                             </p>
                             <p style = "text-indent: 2em">
-                                梯度提升决策树(Gradient Boosting Decision Tree, GBDT)是一种结合决策树和Boosting的集成学习算法，一般选择CART作为基学习器。可以从“函数空间的最优化问题”和“加性模型(Additive Model)”两个不同的角度理解GBDT算法。<br>
+                                梯度提升决策树(Gradient Boosting Decision Tree, GBDT)是一种结合决策树和Boosting的集成学习算法，一般选择CART作为基学习器。
+                                GBDT也被成为梯度提升回归树(Gradient Boosting Regression Tree, GBRT)、多加性回归树(Multiple Additive Regression Tree, MART)等。
+                                可以从“函数空间的最优化问题”和“加性模型(Additive Model)”两个不同的角度理解GBDT算法。<br>
                             </p>
                             <p style = "text-indent: 2em"><b>函数空间的最优化问题</b></p>
                             <p style = "text-indent: 2em">
@@ -279,6 +281,38 @@
                             </p>
                             <p style = "text-indent: 2em">
                                 对于数据集\(\mathcal{D}\)，使用基学习器\(F_{1}(\mathcal{x}) = f_{1}(\mathbf{x})\)取得的结果无法满足要求时，在不改变初始模型\(f_{1}(\mathbf{x})\)的情况下，可以通过增加一个新的基学习器来提升预测精度，如果仍不满足要求，则继续增加直到满足要求或达到终止条件为止，如下面公式所示。
+                                <div style = "font-size: 16px" align = center>
+                                    \(\{y, \mathbf{x}\}: \hat{y}^{(1)} = f_1(x), F_{1}(\mathbf{x}) = f_1(\mathbf{x})\)
+                                    <br><br>
+                                    \(\{y - \hat{y}^{(1)}, \mathbf{x}\}: \hat{y}^{(2)} - F_{1}(\mathbf{x}) = f_2(\mathbf{x}), F_{2}(\mathbf{x}) = F_{1}(\mathbf{x}) + f_{2}(\mathbf{x})\)
+                                    <br><br>
+                                    \(\{y - \hat{y}^{(2)}, \mathbf{x}\}: \hat{y}^{(3)} - F_{2}(\mathbf{x}) = f_3(\mathbf{x}), F_{3}(\mathbf{x}) = F_{2}(\mathbf{x}) + f_{3}(\mathbf{x})\)
+                                    <br><br>
+                                    \(\cdots\cdots\)
+                                    <br><br>
+                                    \(\{y - \hat{y}^{(k - 1)}, \mathbf{x}\}: \hat{y}^{(k)} - F_{k - 1}(\mathbf{x}) = f_k(\mathbf{x}), F_{k}(\mathbf{x}) = F_{k - 1}(\mathbf{x}) + f_{k}(\mathbf{x})\)
+                                    <br><br>
+                                    \(\cdots\cdots\)
+                                    <br><br>
+                                    \(\{y - \hat{y}^{(K - 1)}, \mathbf{x}\}: \hat{y}^{(K)} - F_{K - 1}(\mathbf{x}) = f_K(\mathbf{x}), F_{K}(\mathbf{x}) = F_{K - 1}(\mathbf{x}) + f_{K}(\mathbf{x})\)
+                                </div>
+                            </p>
+                            <p style = "text-indent: 2em">
+                                如果将损失函数定义为
+                                <div style = "font-size: 16px" align = center>
+                                    \(\mathcal{L}(y, F(\mathbf{x})) = \frac{1}{2}(y - F(\mathbf{x}))^2\)
+                                </div>
+                            </p>
+                            <p style = "text-indent: 2em">
+                                则每次迭代时的预测残差可以解释为损失函数的梯度。
+                                <div style = "font-size: 16px" align = center>
+                                    \(y - F(\mathbf{x}) = -(F(\mathbf{x}) - y) = -\frac{\partial \mathcal{L}(y, F(\mathbf{x})}{\partial F(\mathbf{x})}\)
+                                    <br><br>
+                                    \(F(\mathbf{x}) := F(\mathbf{x}) + y - F(\mathbf{x}) = F(\mathbf{x}) - \frac{\partial \mathcal{L}(y, F(\mathbf{x})}{\partial F(\mathbf{x})}\)
+                                </div>
+                            </p>
+                            <p style = "text-indent: 2em">
+                                通过加性模型，每次迭代通过梯度下降方法提升预测模型。而且梯度比残差具有更广泛的概念，进而推广到任意可微分的目标函数求解问题。
                             </p>
                             <h4>2.4 XGBoost</h4>
                             <p>
