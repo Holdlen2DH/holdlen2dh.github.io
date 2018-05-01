@@ -16,6 +16,7 @@ digraph {
 
         dndf [shape = Mrecord, label = "2015|DNDF|Kontschieder", style = filled, fillcolor=lightyellow]
         df [shape = Mrecord, label = "2017|DF|Zhihua Zhou", style = filled, fillcolor=lightyellow]
+        treecnn [shape = Mrecord, label = "2018|Tree-CNN|Roy", style = filled, fillcolor=lightyellow]
 
 
        
@@ -29,6 +30,7 @@ digraph {
 
         dl -> dndf
         dl -> df
+        dl -> treecnn
         dt -> dndf
         rf -> df
 

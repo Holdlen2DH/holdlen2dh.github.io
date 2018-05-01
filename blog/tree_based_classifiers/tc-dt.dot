@@ -23,13 +23,21 @@ digraph {
         cls [label="1962|CLS|Hunt", fillcolor=4]
 
         dt_id3 [label = "1979|ID3|Quinlan", fillcolor=4]
+        dt_c4 [label = "1987|C4.0|Quinlan", fillcolor=4]
         dt_c45 [label = "1993|C4.5|Quinlan", fillcolor=4]
+        dt_c5 [label = "C5.0", fillcolor=4]
+
         dt_cart [label = "1984|CART|Breiman", fillcolor=4]
 
         cls -> dt
-        dt -> {dt_id3; dt_cart; dt_c45}
+        dt_id3 -> dt_c4
+        dt -> {dt_id3; dt_cart; dt_c4}
 
-        {rank = same; dt_id3; dt_c45; dt_c45}
+        dt_c4 -> dt_c45
+
+        dt_c45 -> dt_c5[label = "commercial version"]
+
+        {rank = same; dt_id3; dt_c4; dt_cart}
     }
 
     
