@@ -176,10 +176,12 @@
                                     \(IV(a) = -\sum_{v = 1}^{V}\frac{|D^v|}{|D|}log_{2}(\frac{|D^v|}{|D|})\)
                                     <br><br>
                                     \(IV(色泽) = -\left(\frac{6}{17}log_{2}\frac{6}{17} + \frac{6}{17}log_{2}\frac{6}{17} + \frac{5}{17}log_{2}\frac{5}{17}\right) = 1.5799\)
+                                    <br><br>
+                                    \(Gain\_ration(D, 色泽) = \frac{Gain(D, 色泽)}{IV(色泽)} = \frac{0.109}{1.5799} = 0.069\)
                                 </div>
                             </p>
                             <p style = "text-indent: 2em">
-                                IV称为属性a的固有值(Intrinsic Value)。属性a的可能取值数目越多，即\(V\)越大，则IV(a)值越高。需要注意的是，增益率准则对取值数目较少的属性具有偏好，C4.5算法并不直接选择增益率最大的作为最优划分属性，而是先找出信息增益高出平均水命的属性，再从中选择增益率最高的。
+                                IV称为属性a的固有值(Intrinsic Value)。属性a的可能取值数目越多，即\(V\)越大，则IV(a)值越高。需要注意的是，增益率准则对取值数目较少的属性具有偏好，C4.5算法并不直接选择增益率最大的作为最优划分属性，而是先找出信息增益高出平均水平的属性，再从中选择增益率最高的。
                             </p>
                             <h5>1.4.3 基尼指数</h5>
                             <p style = "text-indent: 2em">
@@ -209,7 +211,7 @@
                                     <li>将\(T_s\)按升序排列得到\(T_s = \{a^1, a^2, \cdots, a^n\}\);</li>
                                     <li>取每两个相邻取值的均值作为候选划分点，得到候选划分点序列\(T_{a}\);</li>
                                     <li>对每个候选划分点\(t\)，将\(D\)分为小于\(t\)和大于\(t\)的子集\(D_t^{-}\)和\(D_t^{+}\)，并计算给予划分点\(t\)二分后的信息增益\(Gain(D, a, t)\)</li>
-                                    <li>选择信心增益最大的候选值作为该连续属性的划分点</li>            
+                                    <li>选择信息增益最大的候选值作为该连续属性的划分点</li>            
                                 </ol>
                                 <div style = "font-size: 16px" align = center>
                                         \( T_a = \{\frac{a^i + a^{i + 1}}{2}|1 \le i \le n - 1\}\)
@@ -275,7 +277,7 @@
                                     <br><br>
                                     \(g_m(\mathbf{x}) = \frac{\partial \mathcal{L}(y, F(\mathbf{x}))}{\partial F(\mathbf{x})} \left|_{F(\mathbf{x}) = F_{m - 1}~(\mathbf{x})} \right.\)
                                     <br><br>
-                                    \(\rho_{m} = \underset{\rho}{arg~min}\mathcal{L}(y, F_{m - 1}~(\mathbf{x} - \rho g_m(\mathbf{x}))\)
+                                    \(\rho_{m} = \underset{\rho}{arg~min}\mathcal{L}(y, F_{m - 1}~(\mathbf{x} - \rho g_m(\mathbf{x})))\)
                                 </div>
                             </p>
                             <p style = "text-indent: 2em"><b>加性模型</b></p>
