@@ -1,0 +1,220 @@
+digraph {
+    compound=true
+	fontname="Inconsolata, Consolas"
+	fontsize=20
+	margin="10,10"
+	ranksep=0.5
+	penwidth=0.5
+	forcelabels=true
+    rankdir = LR
+
+    subgraph cluster_objective_function {
+        margin="10,10"
+		labeljust="left"
+		label = "utils/objective_function.h"
+		style=filled
+		fillcolor=gray95
+
+        cObjectiveFunction[shape = Mrecord, label = "class ObjectiveFunction", style = filled, fillcolor=lightyellow]       
+    }//cluster_objective_function
+
+    subgraph cluster_application {
+        margin="10,10"
+		labeljust="left"
+		label = "utils/application.h"
+		style=filled
+		fillcolor=gray95
+
+        cApplication[shape = Mrecord, label = "class Application", style = filled, fillcolor=lightyellow]
+
+       
+    }
+
+     cApplication->{cBoosting; cObjectiveFunction;cDataset}[label = "member"]
+     cApplication->cMetric[label = "member"]
+     cApplication->sOverallConfig[label = "member"]
+
+    subgraph cluster_bin{
+        rankdir = TB
+        margin="10,10"
+		labeljust="left"
+		label = "utils/bin.h"
+		style=filled
+		fillcolor=gray95
+
+        sHistogramBinEntry[shape = Mrecord, label = "struct HistogramBinEntry", style = filled, fillcolor=lightyellow]
+
+        cBinMapper[shape = Mrecord, label = "class BinMapper", style = filled, fillcolor=lightyellow]
+
+        cOrderedBin[shape = Mrecord, label = "class OrderedBin", style = filled, fillcolor=lightyellow]
+
+        cBinIterator[shape = Mrecord, label = "class BinIterator", style = filled, fillcolor=lightyellow]
+
+        cBin[shape = Mrecord, label = "class Bin", style = filled, fillcolor=lightyellow]
+
+    }
+
+    subgraph cluster_boosting {
+        margin="10,10"
+		labeljust="left"
+		label = "utils/boosting.h"
+		style=filled
+		fillcolor=gray95
+
+        cBoosting[shape = Mrecord, label = "class Boosting", style = filled, fillcolor=lightyellow]
+
+        cGBDTBase[shape = Mrecord, label = "class GBDTBase", style = filled, fillcolor=lightyellow]
+
+        cGBDTBase->cBoosting
+
+    }
+
+    subgraph cluster_config {
+        margin="10,10"
+		labeljust="left"
+		label = "utils/config.h"
+		style=filled
+		fillcolor=gray95
+
+        sConfigBase[shape = Mrecord, label = "struct ConfigBase", style = filled, fillcolor=lightyellow]
+
+        sIOConfig[shape = Mrecord, label = "struct IOConfig", style = filled, fillcolor=lightyellow]
+
+        sIOConfig->sConfigBase
+
+        sObjectiveConfig[shape = Mrecord, label = "struct ObjectiveConfig", style = filled, fillcolor=lightyellow]
+
+        sObjectiveConfig -> sConfigBase
+
+        sMetricConfig[shape = Mrecord, label = "struct MetricConfig", style = filled, fillcolor=lightyellow]
+
+        sMetricConfig->sConfigBase
+
+        sTreeConfig[shape = Mrecord, label = "struct TreeConfig", style = filled, fillcolor=lightyellow]
+
+        sTreeConfig->sConfigBase
+
+        sBoostingConfig[shape = Mrecord, label = "struct BoostingConfig", style = filled, fillcolor=lightyellow]
+
+        sBoostingConfig -> sConfigBase
+
+        sNetworkConfig[shape = Mrecord, label = "struct NetworkConfig", style = filled, fillcolor=lightyellow]
+
+        sNetworkConfig->sConfigBase
+
+        sOverallConfig[shape = Mrecord, label = "struct OverallConfig", style = filled, fillcolor=lightyellow]
+
+        sOverallConfig->sConfigBase
+
+        sParameterAlias[shape = Mrecord, label = "struct ParameterAlias", style = filled, fillcolor=lightyellow]
+
+        {rank = same; sConfigBase; sParameterAlias}
+
+
+    }//cluster_config
+
+    subgraph cluster_dataset_loader {
+        margin="10,10"
+		labeljust="left"
+		label = "utils/dataset_loader.h"
+		style=filled
+		fillcolor=gray95
+
+        cDatasetLoader[shape = Mrecord, label = "class DatasetLoader", style = filled, fillcolor=lightyellow]
+
+    }// subgraph cluster_dataset_loader
+
+    subgraph cluster_dataset {
+        margin="10,10"
+		labeljust="left"
+		label = "utils/dataset.h"
+		style=filled
+		fillcolor=gray95
+
+        cMetadata[shape = Mrecord, label = "class Metadata", style = filled, fillcolor=lightyellow]
+
+        cParser[shape = Mrecord, label = "class Parser", style = filled, fillcolor=lightyellow]
+
+        cDataset[shape = Mrecord, label = "class Dataset", style = filled, fillcolor=lightyellow]
+
+        cDataset->cDatasetLoader[label = "friend"]
+
+
+
+    }// subgraph cluster_dataset
+
+    subgraph cluster_feature_group {
+        margin="10,10"
+		labeljust="left"
+		label = "utils/feature_group.h"
+		style=filled
+		fillcolor=gray95
+
+        cFeatureGroup[shape = Mrecord, label = "class FeatureGroup", style = filled, fillcolor=lightyellow]
+
+        cFeatureGroup ->{cDataset; cDatasetLoader}[label = "friend"]
+    }//cluster_feature_group
+
+    subgraph cluster_metric {
+        margin="10,10"
+		labeljust="left"
+		label = "utils/metric.h"
+		style=filled
+		fillcolor=gray95
+
+        cMetric[shape = Mrecord, label = "class Metric", style = filled, fillcolor=lightyellow]
+
+        cDCGCalculator[shape = Mrecord, label = "class DCGCalculator", style = filled, fillcolor=lightyellow]
+    }//cluster_metric
+
+    
+
+    subgraph cluster_tree {
+        margin="10,10"
+		labeljust="left"
+		label = "utils/tree.h"
+		style=filled
+		fillcolor=gray95
+
+        cTree[shape = Mrecord, label = "class Tree", style = filled, fillcolor=lightyellow]  
+
+        sPathElement[shape = Mrecord, label = "struct PathElement", style = filled, fillcolor=lightyellow]      
+    }//cluster_tree
+
+    subgraph cluster_tree_learner {
+        margin="10,10"
+		labeljust="left"
+		label = "utils/tree_learner.h"
+		style=filled
+		fillcolor=gray95
+
+        cTreeLearner[shape = Mrecord, label = "class TreeLearner", style = filled, fillcolor=lightyellow]  
+
+        sPathElement[shape = Mrecord, label = "struct PathElement", style = filled, fillcolor=lightyellow]      
+    }//cluster_tree_learner
+
+    subgraph cluster_gdbt {
+        margin="10,10"
+		labeljust="left"
+		label = "src/boosting/gbdt.h"
+		style=filled
+		fillcolor=gray95
+
+        cGBDT[shape = Mrecord, label = "class GBDT", style = filled, fillcolor=lightyellow]  
+    }//cluster_tree_learner
+
+    cGBDT->cGBDTBase[label = "inheritance"]
+    cGBDT->cDataset[label = "member"]
+    cGBDT->sBoostingConfig[label = "member"]
+    cGBDT->cTreeLearner[label = "member"]
+    cGBDT->cObjectiveFunction[label = "member"]
+    cGBDT->cMetric[label = "member"]
+    cGBDT->cTree[label = "member"]
+
+
+
+
+    
+ 
+
+}
