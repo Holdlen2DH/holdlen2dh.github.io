@@ -2,7 +2,7 @@ digraph {
     compound=true
 	fontname="Inconsolata, Consolas"
 	fontsize=20
-	margin="10,10"
+	margin="0,0"
 	ranksep=0.5
 	penwidth=0.5
 	forcelabels=true
@@ -11,17 +11,53 @@ digraph {
     subgraph cluster_objective_function {
         margin="10,10"
 		labeljust="left"
-		label = "utils/objective_function.h"
+		//label = "objective_function.h"
 		style=filled
 		fillcolor=gray95
 
-        cObjectiveFunction[shape = Mrecord, label = "class ObjectiveFunction", style = filled, fillcolor=lightyellow]       
+        cObjectiveFunction[shape = Mrecord, label = "class ObjectiveFunction", style = filled, fillcolor=lightyellow]  
+
+        // src/objective/regression_objective.hpp
+        cRegressionL2loss[shape = Mrecord, label = "class RegressionL2loss", style = filled, fillcolor=lightyellow] 
+
+        cRegressionL1loss[shape = Mrecord, label = "class RegressionL1loss", style = filled, fillcolor=lightyellow]
+
+        cRegressionHuberLoss[shape = Mrecord, label = "class RegressionHuberLoss", style = filled, fillcolor=lightyellow] 
+
+        cRegressionFairLoss[shape = Mrecord, label = "class RegressionFairLoss", style = filled, fillcolor=lightyellow] 
+
+        cRegressionPoissonLoss[shape = Mrecord, label = "class RegressionPoissonLoss", style = filled, fillcolor=lightyellow] 
+
+        cRegressionQuantileloss[shape = Mrecord, label = "class RegressionQuantileloss", style = filled, fillcolor=lightyellow] 
+
+        cRegressionMAPELOSS[shape = Mrecord, label = "class RegressionMAPELOSS", style = filled, fillcolor=lightyellow] 
+
+        cRegressionGammaLoss[shape = Mrecord, label = "class RegressionGammaLoss", style = filled, fillcolor=lightyellow]
+
+        cRegressionTweedieLoss[shape = Mrecord, label = "class RegressionTweedieLoss", style = filled, fillcolor=lightyellow]
+
+
+        cRegressionL2loss->cObjectiveFunction[label = "inheritance"]
+
+        {cRegressionL1loss; cRegressionHuberLoss; cRegressionFairLoss; cRegressionPoissonLoss; cRegressionQuantileloss}->cRegressionL2loss[label = "inheritance"]
+
+        cRegressionMAPELOSS->cRegressionL1loss[label = "inheritance"]
+
+        cRegressionGammaLoss->cRegressionPoissonLoss[label = "inheritance"]
+
+        cRegressionTweedieLoss->cRegressionPoissonLoss[label = "inheritance"]
+
+
+
+
+        
+
     }//cluster_objective_function
 
     subgraph cluster_application {
         margin="10,10"
 		labeljust="left"
-		label = "utils/application.h"
+		label = "application.h"
 		style=filled
 		fillcolor=gray95
 
@@ -38,7 +74,7 @@ digraph {
         rankdir = TB
         margin="10,10"
 		labeljust="left"
-		label = "utils/bin.h"
+		label = "bin.h"
 		style=filled
 		fillcolor=gray95
 
@@ -57,7 +93,7 @@ digraph {
     subgraph cluster_boosting {
         margin="10,10"
 		labeljust="left"
-		label = "utils/boosting.h"
+		label = "boosting.h"
 		style=filled
 		fillcolor=gray95
 
@@ -72,7 +108,7 @@ digraph {
     subgraph cluster_config {
         margin="10,10"
 		labeljust="left"
-		label = "utils/config.h"
+		label = "config.h"
 		style=filled
 		fillcolor=gray95
 
@@ -104,7 +140,12 @@ digraph {
 
         sOverallConfig[shape = Mrecord, label = "struct OverallConfig", style = filled, fillcolor=lightyellow]
 
-        sOverallConfig->sConfigBase
+        sOverallConfig->sConfigBase[label = "inheritance"]
+        sOverallConfig->sNetworkConfig[label = "member"]
+        sOverallConfig->sIOConfig[label = "member"]
+        sOverallConfig->sBoostingConfig[label = "member"]
+        sOverallConfig->sObjectiveConfig[label = "member"]
+        sOverallConfig->sMetricConfig[label = "member"]
 
         sParameterAlias[shape = Mrecord, label = "struct ParameterAlias", style = filled, fillcolor=lightyellow]
 
@@ -116,7 +157,7 @@ digraph {
     subgraph cluster_dataset_loader {
         margin="10,10"
 		labeljust="left"
-		label = "utils/dataset_loader.h"
+		label = "dataset_loader.h"
 		style=filled
 		fillcolor=gray95
 
@@ -127,7 +168,7 @@ digraph {
     subgraph cluster_dataset {
         margin="10,10"
 		labeljust="left"
-		label = "utils/dataset.h"
+		label = "dataset.h"
 		style=filled
 		fillcolor=gray95
 
@@ -146,7 +187,7 @@ digraph {
     subgraph cluster_feature_group {
         margin="10,10"
 		labeljust="left"
-		label = "utils/feature_group.h"
+		label = "feature_group.h"
 		style=filled
 		fillcolor=gray95
 
@@ -158,7 +199,7 @@ digraph {
     subgraph cluster_metric {
         margin="10,10"
 		labeljust="left"
-		label = "utils/metric.h"
+		label = "metric.h"
 		style=filled
 		fillcolor=gray95
 
@@ -172,7 +213,7 @@ digraph {
     subgraph cluster_tree {
         margin="10,10"
 		labeljust="left"
-		label = "utils/tree.h"
+		label = "tree.h"
 		style=filled
 		fillcolor=gray95
 
@@ -184,7 +225,7 @@ digraph {
     subgraph cluster_tree_learner {
         margin="10,10"
 		labeljust="left"
-		label = "utils/tree_learner.h"
+		label = "tree_learner.h"
 		style=filled
 		fillcolor=gray95
 
@@ -193,6 +234,8 @@ digraph {
         sPathElement[shape = Mrecord, label = "struct PathElement", style = filled, fillcolor=lightyellow]      
     }//cluster_tree_learner
 
+    ///////////////////////////////////////////////////
+    // src
     subgraph cluster_gdbt {
         margin="10,10"
 		labeljust="left"
@@ -201,7 +244,7 @@ digraph {
 		fillcolor=gray95
 
         cGBDT[shape = Mrecord, label = "class GBDT", style = filled, fillcolor=lightyellow]  
-    }//cluster_tree_learner
+    }//cluster_gdbt
 
     cGBDT->cGBDTBase[label = "inheritance"]
     cGBDT->cDataset[label = "member"]
@@ -210,6 +253,73 @@ digraph {
     cGBDT->cObjectiveFunction[label = "member"]
     cGBDT->cMetric[label = "member"]
     cGBDT->cTree[label = "member"]
+
+    subgraph cluster_goss {
+        margin="10,10"
+		labeljust="left"
+		label = "src/boosting/goss.h"
+		style=filled
+		fillcolor=gray95
+
+        cGOSS[shape = Mrecord, label = "class GOSS", style = filled, fillcolor=lightyellow]  
+    }//cluster_goss
+    cGOSS->cGBDT[label = "inheritance"]
+
+
+    subgraph cluster_dart {
+        margin="10,10"
+		labeljust="left"
+		label = "src/boosting/dart.h"
+		style=filled
+		fillcolor=gray95
+
+        cDART[shape = Mrecord, label = "class DART", style = filled, fillcolor=lightyellow]  
+    }//cluster_dart
+
+    cDART->cGBDT[label = "inheritance"]
+
+    subgraph cluster_rf {
+        margin="10,10"
+		labeljust="left"
+		label = "src/boosting/rf.h"
+		style=filled
+		fillcolor=gray95
+
+        cRF[shape = Mrecord, label = "class RF", style = filled, fillcolor=lightyellow]  
+    }//cluster_dart
+    
+    cRF->cGBDT[label = "inheritance"]
+
+
+
+
+    
+
+    subgraph cluster_feature_hist {
+        margin="10,10"
+		labeljust="left"
+		label = "src/treelearner/feature_histogram.h"
+		style=filled
+		fillcolor=gray95
+
+        cFeatureMetainfo[shape = Mrecord, label = "class FeatureMetainfo", style = filled, fillcolor=lightyellow] 
+
+        cFeatureHistogram[shape = Mrecord, label = "class FeatureHistogram", style = filled, fillcolor=lightyellow] 
+
+        cFeatureHistogram->cFeatureMetainfo[label = "member"]
+
+        cHistogramPool[shape = Mrecord, label = "class HistogramPool", style = filled, fillcolor=lightyellow]
+
+        cHistogramPool->cFeatureHistogram[label = "member"]
+        cHistogramPool->cFeatureMetainfo[label = "member"]
+
+
+    }//cluster_feature_hist
+    cFeatureHistogram->sHistogramBinEntry[label = "member"]
+    cHistogramPool->sHistogramBinEntry[label = "member"]
+    
+
+    
 
 
 

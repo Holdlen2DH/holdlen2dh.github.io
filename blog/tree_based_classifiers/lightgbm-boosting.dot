@@ -1,0 +1,136 @@
+digraph {
+    compound=true
+	fontname="Inconsolata, Consolas"
+	fontsize=20
+	margin="0,0"
+	ranksep=0.5
+	penwidth=0.5
+	forcelabels=true
+    rankdir = LR
+
+    boosting[label = "class Boosting"]
+    gbdtbase[label = "class GBDTBase"]
+    gbdt[label = "class GBDT"]
+    dart[label = "class DART"]
+    goss[label = "class GOSS"]
+    rf[label = "class RF"]
+
+    subgraph cluster_boosting_classes {
+        margin="10,10"
+		labeljust="left"
+		label = "Boosting Classes"
+
+        node [shape=Mrecord]
+        boosting1[label = "class Boosting"]
+        gbdtbase1[label = "class GBDTBase"]
+        gbdt1[label = "class GBDT"]
+        dart1[label = "class DART"]
+        goss1[label = "class GOSS"]
+        rf1[label = "class RF"]
+
+        gbdtbase1->boosting1
+        gbdt1->gbdtbase1
+        {dart1; goss1; rf1}->gbdt1
+    }
+
+
+
+
+    subgraph cluster_boosting_pure_virtual_funs {
+        margin="10,10"
+		labeljust="left"
+		label = "Pure Virtual Functions"
+
+        node [shape=Mrecord]
+
+        {Init;
+        MergeFrom;
+        ResetTrainingData;
+        ResetConfig;
+        AddValidDataset;
+        Train;
+        RefitTree;
+        TrainOneIter;
+        RollbackOneIter;
+        GetCurrentIteration;
+        GetEvalAt;
+        GetTrainingScore;
+        GetNumPredictAt;
+        GetPredictAt;
+        NumPredictOneRow;
+        PredictRaw;
+        PredictRawByMap;
+        Predict;
+        PredictByMap;
+        PredictLeafIndex;
+        PredictLeafIndexByMap;
+        PredictContrib;
+        DumpModel;
+        ModelToIfElse;
+        SaveModelToIfElse;
+        SaveModelToFile;
+        SaveModelToString;
+        LoadModelFromString;
+        FeatureImportance;
+        MaxFeatureIdx;
+        FeatureNames;
+        LabelIdx;
+        NumberOfTotalModel;
+        NumModelPerIteration;
+        NumberOfClasses;
+        NeedAccuratePrediction;
+        InitPredict;
+        SubModelName}
+        
+
+    }
+    boosting->{Init;
+        MergeFrom;
+        ResetTrainingData;
+        ResetConfig;
+        AddValidDataset;
+        Train;
+        RefitTree;
+        TrainOneIter;
+        RollbackOneIter;
+        GetCurrentIteration;
+        GetEvalAt;
+        GetTrainingScore;
+        GetNumPredictAt;
+        GetPredictAt;
+        NumPredictOneRow;
+        PredictRaw;
+        PredictRawByMap;
+        Predict;
+        PredictByMap;
+        PredictLeafIndex;
+        PredictLeafIndexByMap;
+        PredictContrib;
+        DumpModel;
+        ModelToIfElse;
+        SaveModelToIfElse;
+        SaveModelToFile;
+        SaveModelToString;
+        LoadModelFromString;
+        FeatureImportance;
+        MaxFeatureIdx;
+        FeatureNames;
+        LabelIdx;
+        NumberOfTotalModel;
+        NumModelPerIteration;
+        NumberOfClasses;
+        NeedAccuratePrediction;
+        InitPredict;
+        SubModelName}
+
+    subgraph cluster_gbdtbase_pure_virtual_funs {
+        margin="10,10"
+		labeljust="left"
+		label = "Pure Virtual Functions"
+
+        node [shape=Mrecord]
+        {GetLeafValue; SetLeafValue}
+    }
+
+    gbdtbase->{GetLeafValue; SetLeafValue}
+}
